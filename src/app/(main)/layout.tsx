@@ -8,17 +8,11 @@ export default function MainLayout({ children }: LayoutProps) {
   return (
     <div className="[--header-height:calc(--spacing(14))]">
       <SidebarProvider className="flex flex-col">
-        <React.Suspense
-          fallback={<header className="h-(--header-height) border-b" />}
-        >
-          <Header />
-        </React.Suspense>
+        <Header />
         <div className="flex flex-1">
           <AppSidebar />
           <SidebarInset>
-            <React.Suspense fallback={<div className="p-4">Carregando...</div>}>
-              {children}
-            </React.Suspense>
+            <React.Suspense fallback={null}>{children}</React.Suspense>
           </SidebarInset>
         </div>
       </SidebarProvider>
