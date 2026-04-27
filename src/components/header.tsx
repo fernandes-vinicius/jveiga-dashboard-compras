@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { DateRangePicker } from "@/components/date-range-picker";
+import { DateRangePickerWithSuspense } from "@/components/date-range-picker-with-suspense";
 import { PanelLeftIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -38,7 +38,7 @@ export function Header() {
         </div>
 
         <div className="ml-auto sm:mx-auto">
-          <DateRangePicker />
+          <DateRangePickerWithSuspense />
         </div>
       </div>
     </header>
