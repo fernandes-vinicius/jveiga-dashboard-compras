@@ -1,0 +1,75 @@
+import {
+  BarChart3,
+  Bell,
+  Calendar,
+  CheckCircle,
+  ChevronsUpDown,
+  ClipboardClock,
+  DollarSign,
+  Eye,
+  Filter,
+  Folder,
+  Funnel,
+  LayoutDashboard,
+  LogOut,
+  Monitor,
+  Moon,
+  PanelLeft,
+  RefreshCcw,
+  Settings,
+  Sparkle,
+  Sun,
+  Target,
+  TrendingUp,
+  TriangleAlert,
+  User,
+  Users,
+  XCircle,
+} from "lucide-react";
+
+import type { ComponentType, RefAttributes } from "react";
+import type { SVGAttributes } from "@/types";
+
+type ElementAttributes = RefAttributes<SVGSVGElement> & SVGAttributes;
+
+interface IconProps extends ElementAttributes {
+  size?: string | number;
+  absoluteStrokeWidth?: boolean;
+}
+
+export type IconComponentType = ComponentType<IconProps>;
+
+export const CheckCircleIcon = (props: IconProps) => <CheckCircle {...props} />;
+export const TriangleAlertIcon = (props: IconProps) => (
+  <TriangleAlert {...props} />
+);
+export const XCircleIcon = (props: IconProps) => <XCircle {...props} />;
+export const SettingsIcon = (props: IconProps) => <Settings {...props} />;
+export const BellIcon = (props: IconProps) => <Bell {...props} />;
+export const LayoutDashboardIcon = (props: IconProps) => (
+  <LayoutDashboard {...props} />
+);
+export const TrendingUpIcon = (props: IconProps) => <TrendingUp {...props} />;
+export const BarChart3Icon = (props: IconProps) => <BarChart3 {...props} />;
+export const UserIcon = (props: IconProps) => <User {...props} />;
+export const UsersIcon = (props: IconProps) => <Users {...props} />;
+export const FilterIcon = (props: IconProps) => <Filter {...props} />;
+export const DollarSignIcon = (props: IconProps) => <DollarSign {...props} />;
+export const LogOutIcon = (props: IconProps) => <LogOut {...props} />;
+export const MoonIcon = (props: IconProps) => <Moon {...props} />;
+export const SunIcon = (props: IconProps) => <Sun {...props} />;
+export const MonitorIcon = (props: IconProps) => <Monitor {...props} />;
+export const SparkleIcon = (props: IconProps) => <Sparkle {...props} />;
+export const ChevronsUpDownIcon = (props: IconProps) => (
+  <ChevronsUpDown {...props} />
+);
+export const CalendarIcon = (props: IconProps) => <Calendar {...props} />;
+export const FolderIcon = (props: IconProps) => <Folder {...props} />;
+export const EyeIcon = (props: IconProps) => <Eye {...props} />;
+export const TargetIcon = (props: IconProps) => <Target {...props} />;
+export const ClipboardClockIcon = (props: IconProps) => (
+  <ClipboardClock {...props} />
+);
+export const RefreshCcwIcon = (props: IconProps) => <RefreshCcw {...props} />;
+export const FunnelIcon = (props: IconProps) => <Funnel {...props} />;
+export const PanelLeftIcon = (props: IconProps) => <PanelLeft {...props} />;
