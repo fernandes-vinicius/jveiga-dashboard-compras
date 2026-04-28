@@ -9,6 +9,7 @@ import {
   Eye,
   Filter,
   Folder,
+  Folders,
   Funnel,
   LayoutDashboard,
   LogOut,
@@ -65,6 +66,7 @@ export const ChevronsUpDownIcon = (props: IconProps) => (
 );
 export const CalendarIcon = (props: IconProps) => <Calendar {...props} />;
 export const FolderIcon = (props: IconProps) => <Folder {...props} />;
+export const FoldersIcon = (props: IconProps) => <Folders {...props} />;
 export const EyeIcon = (props: IconProps) => <Eye {...props} />;
 export const TargetIcon = (props: IconProps) => <Target {...props} />;
 export const ClipboardClockIcon = (props: IconProps) => (

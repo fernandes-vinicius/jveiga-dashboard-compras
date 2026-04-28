@@ -1,5 +1,6 @@
 "use client";
 
+import { ptBR } from "date-fns/locale";
 import {
   ChevronDownIcon,
   ChevronLeftIcon,
@@ -21,7 +22,8 @@ function Calendar({
   showOutsideDays = true,
   captionLayout = "label",
   buttonVariant = "ghost",
-  locale,
+  lang = "pt-BR",
+  locale = ptBR,
   formatters,
   components,
   ...props

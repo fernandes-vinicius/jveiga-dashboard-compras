@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useTheme } from "next-themes";
 import {
   ChevronsUpDownIcon,
@@ -18,7 +19,6 @@ import {
   DropdownMenuPortal,
   DropdownMenuSeparator,
   DropdownMenuSub,
-  // DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
@@ -28,12 +28,8 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
-
-const user = {
-  name: "John Doe",
-  email: "john.doe@example.com",
-  avatar: "/avatars/people.jpg",
-};
+import { Skeleton } from "@/components/ui/skeleton";
+import { authClient } from "@/lib/auth/client";
 
 const themeIcons = {
   system: MonitorIcon,
@@ -42,11 +38,44 @@ const themeIcons = {
 };
 
 export function NavUser() {
-  const { theme, setTheme } = useTheme();
+  const router = useRouter();
   const { isMobile } = useSidebar();
+  const { theme, setTheme } = useTheme();
+
+  const { data: session, isPending, error } = authClient.useSession();
 
   const CurrentThemeIcon =
     themeIcons[(theme as keyof typeof themeIcons) ?? "system"];
+
+  const handleLogout = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          router.push("/auth/login");
+        },
+      },
+    });
+  };
+
+  if (isPending) {
+    return (
+      <SidebarMenu>
+        <SidebarMenuItem>
+          <div className="flex items-center gap-2">
+            <Skeleton className="size-8 shrink-0 rounded-full" />
+            <div className="flex-1 space-y-1">
+              <Skeleton className="h-3 w-1/2" />
+              <Skeleton className="h-2" />
+            </div>
+          </div>
+        </SidebarMenuItem>
+      </SidebarMenu>
+    );
+  }
+
+  if (error) {
+    return null;
+  }
 
   return (
     <SidebarMenu>
@@ -58,14 +87,19 @@ export function NavUser() {
               className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
             >
               <Avatar>
-                <AvatarImage src={user.avatar} alt={user.name} />
+                <AvatarImage
+                  src={session?.user?.image ?? ""}
+                  alt={session?.user.name}
+                />
                 <AvatarFallback className="rounded-lg">
                   <UserIcon className="size-4" />
                 </AvatarFallback>
               </Avatar>
               <div className="grid flex-1 text-left text-sm leading-tight">
-                <span className="truncate font-medium">{user.name}</span>
-                <span className="truncate text-xs">{user.email}</span>
+                <span className="truncate font-medium">
+                  {session?.user.name}
+                </span>
+                <span className="truncate text-xs">{session?.user.email}</span>
               </div>
               <ChevronsUpDownIcon className="ml-auto size-4" />
             </SidebarMenuButton>
@@ -80,17 +114,20 @@ export function NavUser() {
             <DropdownMenuLabel className="p-0 font-normal">
               <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                 <Avatar>
-                  <AvatarImage src={user.avatar} alt={user.name} />
+                  <AvatarImage
+                    src={session?.user?.image ?? ""}
+                    alt={session?.user.name}
+                  />
                   <AvatarFallback>
                     <UserIcon className="size-4" />
                   </AvatarFallback>
                 </Avatar>
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium text-popover-foreground capitalize">
-                    {user.name}
+                    {session?.user.name}
                   </span>
                   <span className="truncate text-xs lowercase">
-                    {user.email}
+                    {session?.user.email}
                   </span>
                 </div>
               </div>
@@ -123,7 +160,7 @@ export function NavUser() {
               </DropdownMenuPortal>
             </DropdownMenuSub>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={handleLogout}>
               <LogOutIcon />
               Sair
             </DropdownMenuItem>
