@@ -44,7 +44,7 @@ function KpiCardsItem({
 
 type KpiCardsValueProps = Pick<
   CountUpProps,
-  "end" | "decimals" | "suffix" | "duration"
+  "end" | "decimals" | "suffix" | "prefix" | "duration"
 > & { className?: string };
 
 function KpiCardsValue({ className, ...countUpProps }: KpiCardsValueProps) {
